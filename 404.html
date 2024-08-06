@@ -4,8 +4,10 @@
   <title>Deep Link Redirect</title>
   <script type="text/javascript">
     function redirect() {
-      const path = window.location.pathname; // Get the URL path
+      let path = window.location.pathname; // Get the URL path
+      // Remove leading slashes and repository name (if applicable)
       path = path.replace(/^\/NuttyFitnessRedirectPage/, '');
+      path = path.replace(/^\/+/, '');
       const deepLink = `fitnutrix://${path}`;
       window.location.href = deepLink; // Redirect to the deep link
     }
@@ -14,10 +16,11 @@
 <body onload="redirect()">
   <p>If you are not redirected, <a id="redirectLink">click here</a>.</p>
   <script type="text/javascript">
+    // Update the link in case JavaScript is disabled or the redirect fails
     let path = window.location.pathname; // Get the URL path
     // Remove leading slashes and repository name (if applicable)
     path = path.replace(/^\/NuttyFitnessRedirectPage/, '');
-    // Update the link in case JavaScript is disabled or the redirect fails
+    path = path.replace(/^\/+/, '');
     document.getElementById('redirectLink').href = `fitnutrix://${path}`;
   </script>
 </body>
